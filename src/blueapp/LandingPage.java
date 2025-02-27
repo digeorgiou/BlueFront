@@ -37,10 +37,10 @@ public class LandingPage extends JFrame {
 		contentPane.add(header);
 		header.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(LandingPage.class.getResource("/images/bluelogo-small.png")));
-		lblNewLabel.setBounds(0, 0, 101, 69);
-		header.add(lblNewLabel);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(LandingPage.class.getResource("/images/bluelogo-small.png")));
+		lblLogo.setBounds(0, 0, 101, 82);
+		header.add(lblLogo);
 		
 		JPanel sidemenu = new JPanel();
 		sidemenu.setBackground(new Color(32, 45, 64));
@@ -53,7 +53,7 @@ public class LandingPage extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Main.getLandingPage().setVisible(false);
-				Main.getSaleRetailPage().setVisible(true);
+				Main.getSalesPage().setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -106,6 +106,11 @@ public class LandingPage extends JFrame {
 				lblPurchase.setBackground(blueMarg);
 				lblPurchase.setOpaque(false);
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Main.getLandingPage().setVisible(false);
+				Main.getPurchasesPage().setVisible(true);
+			}
 		});
 		lblPurchase.setForeground(Color.WHITE);
 		lblPurchase.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -146,6 +151,11 @@ public class LandingPage extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblProvider.setBackground(blueMarg);
 				lblProvider.setOpaque(false);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Main.getLandingPage().setVisible(false);
+				Main.getSuppliersPage().setVisible(true);
 			}
 		});
 		lblProvider.setForeground(Color.WHITE);

@@ -18,7 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UpdateCustomerPage extends JFrame {
+public class CustomersUpdatePage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -30,7 +30,7 @@ public class UpdateCustomerPage extends JFrame {
 	private JTextField textFieldDOY;
 
 	
-	public UpdateCustomerPage() {
+	public CustomersUpdatePage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -48,7 +48,7 @@ public class UpdateCustomerPage extends JFrame {
 		contentPane.add(header);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(UpdateCustomerPage.class.getResource("/images/bluelogo-small.png")));
+		lblNewLabel.setIcon(new ImageIcon(CustomersUpdatePage.class.getResource("/images/bluelogo-small.png")));
 		lblNewLabel.setBounds(0, 0, 101, 82);
 		header.add(lblNewLabel);
 		
@@ -152,21 +152,21 @@ public class UpdateCustomerPage extends JFrame {
 		JButton btnReturn = new JButton("Επιστροφή");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getUpdateCustomerPage().setVisible(false);
+				Main.getCustomersUpdatePage().setVisible(false);
 				Main.getCustomersPage().setVisible(true);
 			}
 		});
 		btnReturn.setForeground(Color.WHITE);
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnReturn.setBackground(new Color(32, 45, 64));
-		btnReturn.setBounds(307, 508, 262, 82);
+		btnReturn.setBounds(236, 508, 262, 82);
 		contentPane.add(btnReturn);
 		
 		JButton btnSaveCustomer = new JButton("Αποθήκευση");
 		btnSaveCustomer.setForeground(Color.WHITE);
 		btnSaveCustomer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSaveCustomer.setBackground(new Color(0, 128, 64));
-		btnSaveCustomer.setBounds(667, 508, 262, 82);
+		btnSaveCustomer.setBounds(734, 508, 262, 82);
 		contentPane.add(btnSaveCustomer);
 	}
 }

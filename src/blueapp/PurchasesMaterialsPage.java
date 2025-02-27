@@ -5,20 +5,28 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.awt.Component;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PurchasesMaterialsPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTable table;
+	private DefaultTableModel model = new DefaultTableModel();
+	private JTextField textFieldSearchMaterials;
 
 
 	public PurchasesMaterialsPage() {
@@ -36,16 +44,16 @@ public class PurchasesMaterialsPage extends JFrame {
 		header.setBounds(0, 0, 1256, 82);
 		contentPane.add(header);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PurchasesMaterialsPage.class.getResource("/images/bluelogo-small.png")));
-		lblNewLabel.setBounds(0, 0, 101, 82);
-		header.add(lblNewLabel);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(PurchasesMaterialsPage.class.getResource("/images/bluelogo-small.png")));
+		lblLogo.setBounds(0, 0, 101, 82);
+		header.add(lblLogo);
 		
-		JLabel lblNewLabel_2 = new JLabel("ΠΡΩΤΕΣ ΥΛΕΣ");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(503, 19, 167, 44);
-		header.add(lblNewLabel_2);
+		JLabel lblMaterials = new JLabel("ΠΡΩΤΕΣ ΥΛΕΣ");
+		lblMaterials.setForeground(Color.WHITE);
+		lblMaterials.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMaterials.setBounds(566, 19, 123, 44);
+		header.add(lblMaterials);
 		
 		JPanel footer = new JPanel();
 		footer.setLayout(null);
@@ -53,62 +61,104 @@ public class PurchasesMaterialsPage extends JFrame {
 		footer.setBounds(0, 632, 1232, 99);
 		contentPane.add(footer);
 		
-		JButton btnAddProduct = new JButton("Προσθήκη Πρώτης Ύλης");
-		btnAddProduct.setForeground(Color.WHITE);
-		btnAddProduct.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAddProduct.setBackground(new Color(0, 128, 0));
-		btnAddProduct.setBounds(7, 298, 237, 105);
-		contentPane.add(btnAddProduct);
+		JButton btnAddMaterial = new JButton("Προσθήκη Πρώτης Ύλης");
+		btnAddMaterial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getPurchasesMaterialsPage().setVisible(false);
+				Main.getPurchaseMaterialsInsertPage().setVisible(true);
+			}
+		});
+		btnAddMaterial.setForeground(Color.WHITE);
+		btnAddMaterial.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAddMaterial.setBackground(new Color(0, 128, 0));
+		btnAddMaterial.setBounds(10, 318, 225, 105);
+		contentPane.add(btnAddMaterial);
 		
 		JButton btnReturn = new JButton("Επιστροφή");
+		btnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getPurchasesMaterialsPage().setVisible(false);
+				Main.getPurchasesPage().setVisible(true);
+			}
+		});
 		btnReturn.setForeground(Color.WHITE);
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnReturn.setBackground(new Color(32, 45, 64));
-		btnReturn.setBounds(26, 468, 181, 94);
+		btnReturn.setBounds(10, 468, 225, 94);
 		contentPane.add(btnReturn);
 		
-		JScrollPane scrollPaneCustomers = new JScrollPane((Component) null);
-		scrollPaneCustomers.setBounds(254, 189, 659, 420);
-		contentPane.add(scrollPaneCustomers);
+		table = new JTable();
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(254, 111, 335, 51);
-		contentPane.add(textField);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Κωδικός", "Υλικό", "Τιμή(τμχ)", "Απόθεμα"
+			}
+		));
+		table.setBounds(57, 192, 659, 420);
+		model = (DefaultTableModel) table.getModel();
 		
-		JButton btnProductSearch = new JButton("Αναζήτηση Προϊόντος");
-		btnProductSearch.setForeground(Color.WHITE);
-		btnProductSearch.setBackground(new Color(32, 45, 64));
-		btnProductSearch.setBounds(624, 112, 243, 49);
-		contentPane.add(btnProductSearch);
+		JScrollPane scrollPaneMaterials = new JScrollPane(table);
+		scrollPaneMaterials.setBounds(254, 189, 659, 420);
+		contentPane.add(scrollPaneMaterials);
 		
-		JButton btnShowProductHistory = new JButton("Προβολή Ιστορικού");
-		btnShowProductHistory.setForeground(Color.WHITE);
-		btnShowProductHistory.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnShowProductHistory.setBackground(new Color(32, 45, 64));
-		btnShowProductHistory.setBounds(947, 177, 260, 105);
-		contentPane.add(btnShowProductHistory);
+		textFieldSearchMaterials = new JTextField();
+		textFieldSearchMaterials.setColumns(10);
+		textFieldSearchMaterials.setBounds(254, 111, 335, 51);
+		contentPane.add(textFieldSearchMaterials);
 		
-		JButton btnUpdateProduct = new JButton("Επεξεργασία Προϊόντος");
-		btnUpdateProduct.setForeground(Color.WHITE);
-		btnUpdateProduct.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnUpdateProduct.setBackground(new Color(32, 45, 64));
-		btnUpdateProduct.setBounds(947, 318, 260, 105);
-		contentPane.add(btnUpdateProduct);
+		JButton btnMaterialSearch = new JButton("Αναζήτηση Προϊόντος");
+		btnMaterialSearch.setForeground(Color.WHITE);
+		btnMaterialSearch.setBackground(new Color(32, 45, 64));
+		btnMaterialSearch.setBounds(624, 112, 289, 49);
+		contentPane.add(btnMaterialSearch);
 		
-		JButton btnShowProductInfo = new JButton("Προβολή Στοιχείων");
-		btnShowProductInfo.setForeground(Color.WHITE);
-		btnShowProductInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnShowProductInfo.setBackground(new Color(32, 45, 64));
-		btnShowProductInfo.setBounds(947, 468, 260, 105);
-		contentPane.add(btnShowProductInfo);
+		JButton btnShowMaterialHistory = new JButton("Προβολή Ιστορικού");
+		btnShowMaterialHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getPurchasesMaterialsPage().setVisible(false);
+				Main.getPurchaseMaterialsStatsPage().setVisible(true);
+			}
+		});
+		btnShowMaterialHistory.setForeground(Color.WHITE);
+		btnShowMaterialHistory.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnShowMaterialHistory.setBackground(new Color(32, 45, 64));
+		btnShowMaterialHistory.setBounds(947, 177, 260, 105);
+		contentPane.add(btnShowMaterialHistory);
 		
-		JButton btnReturn_1 = new JButton("Υλικά");
-		btnReturn_1.setForeground(Color.WHITE);
-		btnReturn_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturn_1.setBackground(new Color(32, 45, 64));
-		btnReturn_1.setBounds(26, 164, 181, 94);
-		contentPane.add(btnReturn_1);
+		JButton btnUpdateMaterial = new JButton("Επεξεργασία Προϊόντος");
+		btnUpdateMaterial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getPurchasesMaterialsPage().setVisible(false);
+				Main.getPurchaseMaterialsUpdatePage().setVisible(true);
+			}
+		});
+		btnUpdateMaterial.setForeground(Color.WHITE);
+		btnUpdateMaterial.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnUpdateMaterial.setBackground(new Color(32, 45, 64));
+		btnUpdateMaterial.setBounds(947, 318, 260, 105);
+		contentPane.add(btnUpdateMaterial);
+		
+		JButton btnShowMaterialInfo = new JButton("Προβολή Στοιχείων");
+		btnShowMaterialInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getPurchasesMaterialsPage().setVisible(false);
+				Main.getPurchaseMaterialsViewPage().setVisible(true);
+			}
+		});
+		btnShowMaterialInfo.setForeground(Color.WHITE);
+		btnShowMaterialInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnShowMaterialInfo.setBackground(new Color(32, 45, 64));
+		btnShowMaterialInfo.setBounds(947, 468, 260, 105);
+		contentPane.add(btnShowMaterialInfo);
+		
+		JButton btnDeleteMaterial = new JButton("Διαγραφή Πρώτης Ύλης");
+		btnDeleteMaterial.setForeground(Color.WHITE);
+		btnDeleteMaterial.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeleteMaterial.setBackground(new Color(182, 7, 64));
+		btnDeleteMaterial.setBounds(10, 181, 225, 96);
+		contentPane.add(btnDeleteMaterial);
 	}
 
 }

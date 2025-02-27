@@ -34,11 +34,11 @@ public class ProductViewPage extends JFrame {
 		header.setBounds(0, 0, 1256, 82);
 		contentPane.add(header);
 		
-		JLabel lblNewLabel_2 = new JLabel("ΠΡΟΒΟΛΗ ΣΤΟΙΧΕΙΩΝ ΠΡΟΙΟΝΤΟΣ");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(496, 25, 320, 31);
-		header.add(lblNewLabel_2);
+		JLabel lblViewProduct = new JLabel("ΠΡΟΒΟΛΗ ΣΤΟΙΧΕΙΩΝ ΠΡΟΙΟΝΤΟΣ");
+		lblViewProduct.setForeground(Color.WHITE);
+		lblViewProduct.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblViewProduct.setBounds(468, 25, 320, 31);
+		header.add(lblViewProduct);
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(ProductViewPage.class.getResource("/images/bluelogo-small.png")));
@@ -51,65 +51,65 @@ public class ProductViewPage extends JFrame {
 		footer.setBounds(0, 632, 1232, 99);
 		contentPane.add(footer);
 		
-		JLabel lblFirstname = new JLabel("Κωδικός Προϊόντος");
-		lblFirstname.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFirstname.setBounds(192, 148, 138, 34);
-		contentPane.add(lblFirstname);
+		JLabel lblProductId = new JLabel("Κωδικός Προϊόντος");
+		lblProductId.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblProductId.setBounds(150, 148, 138, 34);
+		contentPane.add(lblProductId);
 		
-		JLabel lblLastname = new JLabel("Όνομα");
-		lblLastname.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblLastname.setBounds(192, 226, 122, 34);
-		contentPane.add(lblLastname);
+		JLabel lblProductName = new JLabel("Όνομα");
+		lblProductName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblProductName.setBounds(231, 226, 57, 34);
+		contentPane.add(lblProductName);
 		
-		JLabel lblPhoneNumber = new JLabel("Υλικό");
-		lblPhoneNumber.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPhoneNumber.setBounds(192, 298, 83, 34);
-		contentPane.add(lblPhoneNumber);
+		JLabel lblMaterial = new JLabel("Υλικό");
+		lblMaterial.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMaterial.setBounds(244, 298, 44, 34);
+		contentPane.add(lblMaterial);
 		
-		JLabel lblAddress = new JLabel("Βάρος (γρ.)");
-		lblAddress.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblAddress.setBounds(192, 375, 96, 34);
-		contentPane.add(lblAddress);
+		JLabel lblWeight = new JLabel("Βάρος (γρ.)");
+		lblWeight.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblWeight.setBounds(205, 375, 83, 34);
+		contentPane.add(lblWeight);
 		
-		JLabel lblVAT = new JLabel("Κατηγορία");
-		lblVAT.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVAT.setBounds(663, 148, 109, 34);
-		contentPane.add(lblVAT);
+		JLabel lblCategory = new JLabel("Κατηγορία");
+		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCategory.setBounds(650, 148, 83, 34);
+		contentPane.add(lblCategory);
 		
-		JLabel lblDOY = new JLabel("Τιμή");
-		lblDOY.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDOY.setBounds(663, 212, 109, 34);
-		contentPane.add(lblDOY);
+		JLabel lblPrice = new JLabel("Τιμή");
+		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrice.setBounds(696, 212, 37, 34);
+		contentPane.add(lblPrice);
 		
-		JLabel lblSpecificFirstname = new JLabel("Κωδικός Προϊόντος");
-		lblSpecificFirstname.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificFirstname.setBounds(373, 155, 194, 22);
-		contentPane.add(lblSpecificFirstname);
+		JLabel lblSpecificProductId = new JLabel("Κωδικός Προϊόντος");
+		lblSpecificProductId.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificProductId.setBounds(373, 155, 194, 22);
+		contentPane.add(lblSpecificProductId);
 		
-		JLabel lblSpecificLastname = new JLabel("Όνομα");
-		lblSpecificLastname.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificLastname.setBounds(373, 233, 194, 22);
-		contentPane.add(lblSpecificLastname);
+		JLabel lblSpecificProductName = new JLabel("Όνομα");
+		lblSpecificProductName.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificProductName.setBounds(373, 233, 194, 22);
+		contentPane.add(lblSpecificProductName);
 		
-		JLabel lblSpecificPhoneNumber = new JLabel("Υλικό");
-		lblSpecificPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificPhoneNumber.setBounds(373, 305, 83, 22);
-		contentPane.add(lblSpecificPhoneNumber);
+		JLabel lblSpecificMaterial = new JLabel("Υλικό");
+		lblSpecificMaterial.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificMaterial.setBounds(373, 305, 83, 22);
+		contentPane.add(lblSpecificMaterial);
 		
-		JLabel lblSpecificAddress = new JLabel("Βάρος (γρ.)");
-		lblSpecificAddress.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificAddress.setBounds(373, 382, 194, 22);
-		contentPane.add(lblSpecificAddress);
+		JLabel lblSpecificWeight = new JLabel("Βάρος (γρ.)");
+		lblSpecificWeight.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificWeight.setBounds(373, 382, 194, 22);
+		contentPane.add(lblSpecificWeight);
 		
-		JLabel lblSpecificVAT = new JLabel("Κατηγορία");
-		lblSpecificVAT.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificVAT.setBounds(808, 155, 194, 22);
-		contentPane.add(lblSpecificVAT);
+		JLabel lblSpecificCategory = new JLabel("Κατηγορία");
+		lblSpecificCategory.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificCategory.setBounds(808, 155, 194, 22);
+		contentPane.add(lblSpecificCategory);
 		
-		JLabel lblSpecificDOY = new JLabel("Τιμή");
-		lblSpecificDOY.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificDOY.setBounds(808, 219, 194, 22);
-		contentPane.add(lblSpecificDOY);
+		JLabel lblSpecificPrice = new JLabel("Τιμή");
+		lblSpecificPrice.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificPrice.setBounds(808, 219, 194, 22);
+		contentPane.add(lblSpecificPrice);
 		
 		JButton btnReturn = new JButton("Επιστροφή");
 		btnReturn.addActionListener(new ActionListener() {
@@ -124,35 +124,35 @@ public class ProductViewPage extends JFrame {
 		btnReturn.setBounds(455, 493, 262, 82);
 		contentPane.add(btnReturn);
 		
-		JLabel lblDOY_1 = new JLabel("Χρόνος (λεπτά)");
-		lblDOY_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDOY_1.setBounds(663, 267, 109, 34);
-		contentPane.add(lblDOY_1);
+		JLabel lblTimeToMake = new JLabel("Χρόνος (λεπτά)");
+		lblTimeToMake.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTimeToMake.setBounds(624, 267, 109, 34);
+		contentPane.add(lblTimeToMake);
 		
-		JLabel lblDOY_2 = new JLabel("Κόστος");
-		lblDOY_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDOY_2.setBounds(663, 323, 109, 34);
-		contentPane.add(lblDOY_2);
+		JLabel lblCost = new JLabel("Κόστος");
+		lblCost.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCost.setBounds(676, 323, 57, 34);
+		contentPane.add(lblCost);
 		
-		JLabel lblDOY_3 = new JLabel("Απόθεμα");
-		lblDOY_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDOY_3.setBounds(663, 375, 109, 34);
-		contentPane.add(lblDOY_3);
+		JLabel lblStock = new JLabel("Απόθεμα");
+		lblStock.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblStock.setBounds(663, 375, 70, 34);
+		contentPane.add(lblStock);
 		
-		JLabel lblSpecificDOY_1 = new JLabel("Χρόνος (λεπτά)");
-		lblSpecificDOY_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificDOY_1.setBounds(808, 274, 194, 22);
-		contentPane.add(lblSpecificDOY_1);
+		JLabel lblSpecificTimeToMake = new JLabel("Χρόνος (λεπτά)");
+		lblSpecificTimeToMake.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificTimeToMake.setBounds(808, 274, 194, 22);
+		contentPane.add(lblSpecificTimeToMake);
 		
-		JLabel lblSpecificDOY_2 = new JLabel("Κόστος");
-		lblSpecificDOY_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificDOY_2.setBounds(808, 330, 194, 22);
-		contentPane.add(lblSpecificDOY_2);
+		JLabel lblSpecificCost = new JLabel("Κόστος");
+		lblSpecificCost.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificCost.setBounds(808, 330, 194, 22);
+		contentPane.add(lblSpecificCost);
 		
-		JLabel lblSpecificDOY_2_1 = new JLabel("Απόθεμα");
-		lblSpecificDOY_2_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificDOY_2_1.setBounds(808, 382, 194, 22);
-		contentPane.add(lblSpecificDOY_2_1);
+		JLabel lblSpecificStock = new JLabel("Απόθεμα");
+		lblSpecificStock.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificStock.setBounds(808, 382, 194, 22);
+		contentPane.add(lblSpecificStock);
 	}
 
 }

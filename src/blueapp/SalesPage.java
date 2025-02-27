@@ -18,16 +18,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
-public class SaleRetailPage extends JFrame {
+public class SalesPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private JTable tableSearch;
 	private DefaultTableModel model = new DefaultTableModel();
-	private JTextField textField;
+	private JTextField textFieldProductSearch;
+	private JTextField textFieldQuantity;
 
 	
-	public SaleRetailPage() {
+	public SalesPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -49,7 +51,7 @@ public class SaleRetailPage extends JFrame {
 		model = (DefaultTableModel) table.getModel();
 		
 		JScrollPane scrollPaneShoppingCart = new JScrollPane(table);
-		scrollPaneShoppingCart.setBounds(225, 291, 635, 285);
+		scrollPaneShoppingCart.setBounds(226, 394, 634, 182);
 		contentPane.add(scrollPaneShoppingCart);
 		
 		JPanel header = new JPanel();
@@ -58,16 +60,16 @@ public class SaleRetailPage extends JFrame {
 		header.setBounds(0, 0, 1256, 82);
 		contentPane.add(header);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(SaleRetailPage.class.getResource("/images/bluelogo-small.png")));
-		lblNewLabel.setBounds(0, 0, 101, 82);
-		header.add(lblNewLabel);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(SalesPage.class.getResource("/images/bluelogo-small.png")));
+		lblLogo.setBounds(0, 0, 101, 82);
+		header.add(lblLogo);
 		
-		JLabel lblNewLabel_2 = new JLabel("ΠΩΛΗΣΗ");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(586, 19, 84, 44);
-		header.add(lblNewLabel_2);
+		JLabel lblSale = new JLabel("ΠΩΛΗΣΗ");
+		lblSale.setForeground(Color.WHITE);
+		lblSale.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSale.setBounds(586, 19, 84, 44);
+		header.add(lblSale);
 		
 		JPanel footer = new JPanel();
 		footer.setLayout(null);
@@ -79,74 +81,101 @@ public class SaleRetailPage extends JFrame {
 		btnSaleButton.setBackground(new Color(0, 128, 0));
 		btnSaleButton.setForeground(new Color(255, 255, 255));
 		btnSaleButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSaleButton.setBounds(923, 485, 274, 89);
+		btnSaleButton.setBounds(923, 487, 274, 89);
 		contentPane.add(btnSaleButton);
 		
 		JButton btnRestoreButton = new JButton("Επαναφορά");
 		btnRestoreButton.setForeground(Color.WHITE);
 		btnRestoreButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnRestoreButton.setBackground(new Color(255, 128, 0));
-		btnRestoreButton.setBounds(923, 369, 274, 89);
+		btnRestoreButton.setBounds(923, 387, 274, 89);
 		contentPane.add(btnRestoreButton);
 		
 		JButton btnReturnButton = new JButton("Επιστροφή");
 		btnReturnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getSaleRetailPage().setVisible(false);
+				Main.getSalesPage().setVisible(false);
 				Main.getLandingPage().setVisible(true);			
 				}
 		});
 		btnReturnButton.setForeground(Color.WHITE);
 		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturnButton.setBackground(new Color(0, 128, 0));
-		btnReturnButton.setBounds(32, 485, 158, 89);
+		btnReturnButton.setBackground(new Color(32, 45, 64));
+		btnReturnButton.setBounds(15, 486, 179, 89);
 		contentPane.add(btnReturnButton);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(929, 169, 255, 37);
-		contentPane.add(comboBox);
+		JComboBox comboBoxCustomer = new JComboBox();
+		comboBoxCustomer.setBounds(923, 131, 274, 37);
+		contentPane.add(comboBoxCustomer);
 		
 		JLabel lblCustomer = new JLabel("ΠΕΛΑΤΗΣ");
 		lblCustomer.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblCustomer.setBounds(931, 136, 250, 27);
+		lblCustomer.setBounds(1026, 93, 88, 27);
 		contentPane.add(lblCustomer);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(929, 253, 255, 37);
-		contentPane.add(comboBox_1);
+		JComboBox comboBoxPaymentMethod = new JComboBox();
+		comboBoxPaymentMethod.setBounds(10, 172, 188, 37);
+		contentPane.add(comboBoxPaymentMethod);
 		
 		JLabel lblPaymentMethod = new JLabel("ΤΡΟΠΟΣ ΠΛΗΡΩΜΗΣ");
 		lblPaymentMethod.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPaymentMethod.setBounds(931, 217, 250, 27);
+		lblPaymentMethod.setBounds(23, 138, 164, 27);
 		contentPane.add(lblPaymentMethod);
 		
-		JLabel lblproduct = new JLabel("Προϊόν");
-		lblproduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblproduct.setBounds(134, 164, 128, 37);
-		contentPane.add(lblproduct);
+		JLabel lblProduct = new JLabel("Προϊόν");
+		lblProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblProduct.setBounds(226, 111, 67, 37);
+		contentPane.add(lblProduct);
 		
-		textField = new JTextField();
-		textField.setBounds(216, 161, 276, 45);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldProductSearch = new JTextField();
+		textFieldProductSearch.setBounds(306, 105, 313, 45);
+		contentPane.add(textFieldProductSearch);
+		textFieldProductSearch.setColumns(10);
 		
 		JButton btnSearchProduct = new JButton("Αναζήτηση");
 		btnSearchProduct.setForeground(new Color(255, 255, 255));
 		btnSearchProduct.setBackground(new Color(32, 54, 64));
 		btnSearchProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnSearchProduct.setBounds(519, 156, 164, 56);
+		btnSearchProduct.setBounds(643, 111, 217, 37);
 		contentPane.add(btnSearchProduct);
 		
-		JButton btnAddProductToCart = new JButton("Προσθήκη");
+		JButton btnAddProductToCart = new JButton("Προσθήκη στο καλάθι");
 		btnAddProductToCart.setForeground(Color.WHITE);
 		btnAddProductToCart.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnAddProductToCart.setBackground(new Color(32, 54, 64));
-		btnAddProductToCart.setBounds(704, 156, 164, 56);
+		btnAddProductToCart.setBounds(923, 239, 274, 79);
 		contentPane.add(btnAddProductToCart);
 		
 		JLabel lblCart = new JLabel("Καλάθι");
 		lblCart.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCart.setBounds(478, 249, 80, 37);
+		lblCart.setBounds(469, 346, 80, 37);
 		contentPane.add(lblCart);
+		
+		tableSearch = new JTable();
+		
+		tableSearch.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Κωδικός", "Προϊόν","Τιμή" 
+			}
+		));
+		tableSearch.setBounds(57, 192, 635, 169);
+		model = (DefaultTableModel) tableSearch.getModel();
+		
+		
+		JScrollPane scrollPaneProductSearch = new JScrollPane(tableSearch);
+		scrollPaneProductSearch.setBounds(226, 166, 635, 169);
+		contentPane.add(scrollPaneProductSearch);
+		
+		JLabel lblQuantity = new JLabel("Ποσότητα");
+		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblQuantity.setBounds(923, 191, 93, 37);
+		contentPane.add(lblQuantity);
+		
+		textFieldQuantity = new JTextField();
+		textFieldQuantity.setColumns(10);
+		textFieldQuantity.setBounds(1043, 191, 152, 37);
+		contentPane.add(textFieldQuantity);
 	}
 }

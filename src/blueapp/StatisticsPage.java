@@ -44,16 +44,16 @@ public class StatisticsPage extends JFrame {
 		header.setBounds(0, 0, 1256, 82);
 		contentPane.add(header);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(StatisticsPage.class.getResource("/images/bluelogo-small.png")));
-		lblNewLabel.setBounds(0, 0, 101, 82);
-		header.add(lblNewLabel);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(StatisticsPage.class.getResource("/images/bluelogo-small.png")));
+		lblLogo.setBounds(0, 0, 101, 82);
+		header.add(lblLogo);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("ΣΤΑΤΙΣΤΙΚΑ ΠΩΛΗΣΕΩΝ");
-		lblNewLabel_2_1.setForeground(Color.WHITE);
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2_1.setBounds(520, 25, 215, 31);
-		header.add(lblNewLabel_2_1);
+		JLabel lblSalesStats = new JLabel("ΣΤΑΤΙΣΤΙΚΑ ΠΩΛΗΣΕΩΝ");
+		lblSalesStats.setForeground(Color.WHITE);
+		lblSalesStats.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSalesStats.setBounds(520, 25, 215, 31);
+		header.add(lblSalesStats);
 		
 		JPanel footer = new JPanel();
 		footer.setLayout(null);
@@ -80,8 +80,8 @@ public class StatisticsPage extends JFrame {
 		});
 		btnReturn.setForeground(Color.WHITE);
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturn.setBackground(new Color(0, 128, 0));
-		btnReturn.setBounds(27, 478, 158, 89);
+		btnReturn.setBackground(new Color(32, 45, 64));
+		btnReturn.setBounds(27, 478, 198, 96);
 		contentPane.add(btnReturn);
 		
 		JLabel lblDateFrom = new JLabel("Από : ");
@@ -115,5 +115,19 @@ public class StatisticsPage extends JFrame {
 		lblSales.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblSales.setBounds(537, 93, 158, 51);
 		contentPane.add(lblSales);
+		
+		JButton btnDeleteSale = new JButton("Διαγραφή Πώλησης");
+		btnDeleteSale.setForeground(new Color(255, 255, 255));
+		btnDeleteSale.setBackground(new Color(182, 7, 64));
+		btnDeleteSale.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeleteSale.setBounds(27, 154, 198, 96);
+		contentPane.add(btnDeleteSale);
+		
+		JButton btnShowSales = new JButton("Προβολή");
+		btnShowSales.setForeground(Color.WHITE);
+		btnShowSales.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnShowSales.setBackground(new Color(0, 128, 0));
+		btnShowSales.setBounds(993, 412, 198, 96);
+		contentPane.add(btnShowSales);
 	}
 }

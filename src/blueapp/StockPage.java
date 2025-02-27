@@ -62,9 +62,9 @@ public class StockPage extends JFrame {
 		table.setBounds(57, 192, 659, 420);
 		model = (DefaultTableModel) table.getModel();
 		
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(263, 185, 659, 420);
-		contentPane.add(scrollPane);
+		JScrollPane scrollPaneStock = new JScrollPane(table);
+		scrollPaneStock.setBounds(263, 185, 659, 420);
+		contentPane.add(scrollPaneStock);
 		
 		JPanel header = new JPanel();
 		header.setLayout(null);
@@ -72,16 +72,16 @@ public class StockPage extends JFrame {
 		header.setBounds(0, 0, 1256, 82);
 		contentPane.add(header);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(StockPage.class.getResource("/images/bluelogo-small.png")));
-		lblNewLabel.setBounds(0, 0, 100, 82);
-		header.add(lblNewLabel);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(StockPage.class.getResource("/images/bluelogo-small.png")));
+		lblLogo.setBounds(0, 0, 100, 82);
+		header.add(lblLogo);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("ΑΠΟΘΗΚΗ");
-		lblNewLabel_2_1.setForeground(Color.WHITE);
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2_1.setBounds(582, 25, 91, 31);
-		header.add(lblNewLabel_2_1);
+		JLabel lblStock = new JLabel("ΑΠΟΘΗΚΗ");
+		lblStock.setForeground(Color.WHITE);
+		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblStock.setBounds(582, 25, 91, 31);
+		header.add(lblStock);
 		
 		JPanel footer = new JPanel();
 		footer.setLayout(null);
@@ -105,7 +105,7 @@ public class StockPage extends JFrame {
 		});
 		btnReturnButton.setForeground(Color.WHITE);
 		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturnButton.setBackground(new Color(0, 128, 0));
+		btnReturnButton.setBackground(new Color(32, 45, 64));
 		btnReturnButton.setBounds(40, 483, 158, 89);
 		contentPane.add(btnReturnButton);
 		

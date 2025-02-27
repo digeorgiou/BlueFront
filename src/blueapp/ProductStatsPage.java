@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -12,6 +14,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,8 +24,10 @@ public class ProductStatsPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTable table;
+	private DefaultTableModel model = new DefaultTableModel();
+	private JTextField textFieldDateFrom;
+	private JTextField textFieldDateTo;
 
 
 	public ProductStatsPage() {
@@ -47,7 +53,7 @@ public class ProductStatsPage extends JFrame {
 		JLabel lblProductSalesStats = new JLabel("ΣΤΑΤΙΣΤΙΚΑ ΠΩΛΗΣΕΩΝ ΠΡΟΙΟΝΤΟΣ");
 		lblProductSalesStats.setForeground(Color.WHITE);
 		lblProductSalesStats.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblProductSalesStats.setBounds(490, 25, 316, 31);
+		lblProductSalesStats.setBounds(470, 25, 316, 31);
 		header.add(lblProductSalesStats);
 		
 		JPanel footer = new JPanel();
@@ -56,22 +62,22 @@ public class ProductStatsPage extends JFrame {
 		footer.setBounds(0, 632, 1232, 99);
 		contentPane.add(footer);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(1008, 174, 182, 37);
-		contentPane.add(textField);
+		textFieldDateFrom = new JTextField();
+		textFieldDateFrom.setColumns(10);
+		textFieldDateFrom.setBounds(1008, 174, 182, 37);
+		contentPane.add(textFieldDateFrom);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(1008, 276, 182, 37);
-		contentPane.add(textField_1);
+		textFieldDateTo = new JTextField();
+		textFieldDateTo.setColumns(10);
+		textFieldDateTo.setBounds(1008, 276, 182, 37);
+		contentPane.add(textFieldDateTo);
 		
-		JButton btnReturn = new JButton("Προβολή");
-		btnReturn.setForeground(Color.WHITE);
-		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturn.setBackground(new Color(0, 128, 0));
-		btnReturn.setBounds(1007, 481, 158, 89);
-		contentPane.add(btnReturn);
+		JButton btnShowSales = new JButton("Προβολή");
+		btnShowSales.setForeground(Color.WHITE);
+		btnShowSales.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnShowSales.setBackground(new Color(0, 128, 0));
+		btnShowSales.setBounds(1008, 426, 194, 96);
+		contentPane.add(btnShowSales);
 		
 		JLabel lblDateFrom = new JLabel("Από : ");
 		lblDateFrom.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -83,26 +89,45 @@ public class ProductStatsPage extends JFrame {
 		lblDateTo.setBounds(1008, 243, 100, 20);
 		contentPane.add(lblDateTo);
 		
-		JScrollPane scrollPaneCustomerSales = new JScrollPane((Component) null);
-		scrollPaneCustomerSales.setBounds(282, 144, 668, 462);
-		contentPane.add(scrollPaneCustomerSales);
+		table = new JTable();
+		
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Προϊόν", "Επώνυμο Πελάτη", "Όνομα Πελάτη", "Ημερομηνία", "Ποσό" 
+			}
+		));
+		table.setBounds(57, 192, 668, 462);
+		model = (DefaultTableModel) table.getModel();
+		
+		JScrollPane scrollPaneProductSales = new JScrollPane(table);
+		scrollPaneProductSales.setBounds(282, 144, 668, 462);
+		contentPane.add(scrollPaneProductSales);
 		
 		JLabel lblCustomerSales = new JLabel("ΠΩΛΗΣΕΙΣ ΠΡΟΙΟΝΤΟΣ");
 		lblCustomerSales.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblCustomerSales.setBounds(466, 90, 299, 43);
 		contentPane.add(lblCustomerSales);
 		
-		JButton btnReturn_1 = new JButton("Επιστροφή");
-		btnReturn_1.addActionListener(new ActionListener() {
+		JButton btnReturn = new JButton("Επιστροφή");
+		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.getProductStatsPage().setVisible(false);
 				Main.getProductsPage().setVisible(true);
 			}
 		});
-		btnReturn_1.setForeground(Color.WHITE);
-		btnReturn_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturn_1.setBackground(new Color(32, 45, 64));
-		btnReturn_1.setBounds(50, 481, 158, 89);
-		contentPane.add(btnReturn_1);
+		btnReturn.setForeground(Color.WHITE);
+		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReturn.setBackground(new Color(32, 45, 64));
+		btnReturn.setBounds(49, 426, 194, 96);
+		contentPane.add(btnReturn);
+		
+		JButton btnDeleteSale = new JButton("Διαγραφή Πώλησης");
+		btnDeleteSale.setForeground(Color.WHITE);
+		btnDeleteSale.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeleteSale.setBackground(new Color(182, 7, 64));
+		btnDeleteSale.setBounds(49, 191, 194, 96);
+		contentPane.add(btnDeleteSale);
 	}
 }

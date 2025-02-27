@@ -92,20 +92,20 @@ public class CustomersPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Main.getCustomersPage().setVisible(false);
-				Main.getAddCustomerPage().setVisible(true);
+				Main.getCustomersInsertPage().setVisible(true);
 			}
 		});
 		btnAddCustomer.setForeground(Color.WHITE);
 		btnAddCustomer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAddCustomer.setBackground(new Color(0, 128, 0));
-		btnAddCustomer.setBounds(27, 221, 181, 105);
+		btnAddCustomer.setBounds(27, 330, 198, 105);
 		contentPane.add(btnAddCustomer);
 		
 		JButton btnUpdateCustomer = new JButton("Επεξεργασία Πελάτη");
 		btnUpdateCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.getCustomersPage().setVisible(false);
-				Main.getUpdateCustomerPage().setVisible(true);
+				Main.getCustomersUpdatePage().setVisible(true);
 			}
 		});
 		btnUpdateCustomer.setForeground(Color.WHITE);
@@ -125,7 +125,7 @@ public class CustomersPage extends JFrame {
 		btnReturn.setForeground(Color.WHITE);
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnReturn.setBackground(new Color(32, 45, 64));
-		btnReturn.setBounds(27, 480, 181, 94);
+		btnReturn.setBounds(27, 480, 198, 94);
 		contentPane.add(btnReturn);
 		
 		JButton btnShowCustomerInfo = new JButton("Προβολή Στοιχείων");
@@ -155,5 +155,12 @@ public class CustomersPage extends JFrame {
 		btnShowCustomerHistory.setBackground(new Color(32, 45, 64));
 		btnShowCustomerHistory.setBounds(948, 189, 260, 105);
 		contentPane.add(btnShowCustomerHistory);
+		
+		JButton btnDeleteCustomer = new JButton("Διαγραφή Πελάτη");
+		btnDeleteCustomer.setForeground(Color.WHITE);
+		btnDeleteCustomer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeleteCustomer.setBackground(new Color(182, 7, 64));
+		btnDeleteCustomer.setBounds(27, 189, 198, 96);
+		contentPane.add(btnDeleteCustomer);
 	}
 }

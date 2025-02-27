@@ -22,7 +22,7 @@ import javax.swing.event.ChangeEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AddCustomerPage extends JFrame {
+public class CustomersInsertPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -33,7 +33,7 @@ public class AddCustomerPage extends JFrame {
 	private JTextField textFieldVAT;
 	private JTextField textFieldDOY;
 
-	public AddCustomerPage() {
+	public CustomersInsertPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -51,7 +51,7 @@ public class AddCustomerPage extends JFrame {
 		contentPane.add(header);
 		
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(AddCustomerPage.class.getResource("/images/bluelogo-small.png")));
+		lblLogo.setIcon(new ImageIcon(CustomersInsertPage.class.getResource("/images/bluelogo-small.png")));
 		lblLogo.setBounds(0, 0, 99, 82);
 		header.add(lblLogo);
 		
@@ -156,21 +156,21 @@ public class AddCustomerPage extends JFrame {
 		btnReturn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Main.getAddCustomerPage().setVisible(false);
+				Main.getCustomersInsertPage().setVisible(false);
 				Main.getCustomersPage().setVisible(true);
 			}
 		});
 		btnReturn.setForeground(new Color(255, 255, 255));
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnReturn.setBackground(new Color(32, 45, 64));
-		btnReturn.setBounds(314, 501, 262, 82);
+		btnReturn.setBounds(236, 501, 262, 82);
 		contentPane.add(btnReturn);
 		
 		JButton btnSave = new JButton("Αποθήκευση");
 		btnSave.setForeground(Color.WHITE);
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSave.setBackground(new Color(0, 128, 64));
-		btnSave.setBounds(674, 501, 262, 82);
+		btnSave.setBounds(734, 501, 262, 82);
 		contentPane.add(btnSave);
 	}
 }

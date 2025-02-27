@@ -56,32 +56,32 @@ public class CustomerViewPage extends JFrame {
 		
 		JLabel lblFirstname = new JLabel("Όνομα");
 		lblFirstname.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFirstname.setBounds(277, 141, 83, 34);
+		lblFirstname.setBounds(297, 141, 54, 34);
 		contentPane.add(lblFirstname);
 		
 		JLabel lblLastname = new JLabel("Επώνυμο");
 		lblLastname.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblLastname.setBounds(277, 219, 83, 34);
+		lblLastname.setBounds(277, 219, 74, 34);
 		contentPane.add(lblLastname);
 		
 		JLabel lblPhoneNumber = new JLabel("Τηλέφωνο");
 		lblPhoneNumber.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPhoneNumber.setBounds(277, 291, 83, 34);
+		lblPhoneNumber.setBounds(268, 291, 83, 34);
 		contentPane.add(lblPhoneNumber);
 		
 		JLabel lblAddress = new JLabel("Διεύθυνση");
 		lblAddress.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblAddress.setBounds(277, 368, 83, 34);
+		lblAddress.setBounds(268, 368, 83, 34);
 		contentPane.add(lblAddress);
 		
 		JLabel lblVAT = new JLabel("ΑΦΜ");
 		lblVAT.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVAT.setBounds(719, 141, 83, 34);
+		lblVAT.setBounds(719, 141, 41, 34);
 		contentPane.add(lblVAT);
 		
 		JLabel lblDOY = new JLabel("ΔΟΥ");
 		lblDOY.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDOY.setBounds(719, 206, 83, 34);
+		lblDOY.setBounds(719, 206, 41, 34);
 		contentPane.add(lblDOY);
 		
 		JLabel lblSpecificFirstname = new JLabel("Ονομα");
@@ -106,7 +106,7 @@ public class CustomerViewPage extends JFrame {
 		
 		JLabel lblSpecificVAT = new JLabel("ΑΦΜ");
 		lblSpecificVAT.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSpecificVAT.setBounds(838, 153, 194, 22);
+		lblSpecificVAT.setBounds(838, 148, 194, 22);
 		contentPane.add(lblSpecificVAT);
 		
 		JLabel lblSpecificDOY = new JLabel("ΔΟΥ");

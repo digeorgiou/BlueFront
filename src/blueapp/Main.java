@@ -2,24 +2,36 @@ package blueapp;
 
 import java.awt.EventQueue;
 
-import gr.aueb.cf.schoolapp.LandingPage;
 
 public class Main {
 	
 	private final static LandingPage landingPage = new LandingPage();
-	private final static SaleRetailPage saleRetailPage = new SaleRetailPage();
+	private final static SalesPage salesPage = new SalesPage();
 	private final static CustomersPage customersPage = new CustomersPage();
-	private final static AddCustomerPage addCustomerPage = new AddCustomerPage();
+	private final static CustomersInsertPage customersInsertPage = new CustomersInsertPage();
 	private final static StatisticsPage statisticsPage = new StatisticsPage();
-	private final static UpdateCustomerPage updateCustomerPage = new UpdateCustomerPage();
+	private final static CustomersUpdatePage customersUpdatePage = new CustomersUpdatePage();
 	private final static CustomerStatsPage customerStatsPage = new CustomerStatsPage();
 	private final static CustomerViewPage customerViewPage = new CustomerViewPage();
 	private final static StockPage stockPage = new StockPage();
-	private final static AddProductPage addProductPage = new AddProductPage();
+	private final static ProductInsertPage productInsertPage = new ProductInsertPage();
 	private final static ProductsPage productsPage = new ProductsPage();
 	private final static ProductStatsPage productStatsPage = new ProductStatsPage();
 	private final static ProductViewPage productViewPage = new ProductViewPage();
-	private final static UpdateProductPage updateProductPage = new UpdateProductPage();
+	private final static ProductUpdatePage productUpdatePage = new ProductUpdatePage();
+	private final static PurchasesPage purchasesPage = new PurchasesPage();
+	private final static PurchasesStatsPage purchasesStatsPage = new PurchasesStatsPage();
+	private final static PurchasesMaterialsPage purchasesMaterialsPage = new PurchasesMaterialsPage();
+	private final static PurchaseMaterialsInsertPage purchaseMaterialsInsertPage = new PurchaseMaterialsInsertPage();
+	private final static PurchaseMaterialsStatsPage purchaseMaterialsStatsPage = new PurchaseMaterialsStatsPage();
+	private final static PurchaseMaterialsUpdatePage purchaseMaterialsUpdatePage = new PurchaseMaterialsUpdatePage();
+	private final static PurchaseMaterialsViewPage purchaseMaterialsViewPage = new PurchaseMaterialsViewPage();
+	private final static SuppliersPage suppliersPage = new SuppliersPage();
+	private final static SuppliersInsertPage suppliersInsertPage = new SuppliersInsertPage();
+	private final static SuppliersStatsPage suppliersStatsPage = new SuppliersStatsPage();
+	private final static SuppliersUpdatePage suppliersUpdatePage = new SuppliersUpdatePage();
+	private final static SuppliersViewPage suppliersViewPage = new SuppliersViewPage();
+	
 	
 	public static void main(String[] args) {
 		
@@ -29,20 +41,20 @@ public class Main {
 					landingPage.setVisible(true);
 					landingPage.setLocationRelativeTo(null);
 					
-					saleRetailPage.setVisible(false);
-					saleRetailPage.setLocationRelativeTo(null);
+					salesPage.setVisible(false);
+					salesPage.setLocationRelativeTo(null);
 					
 					customersPage.setVisible(false);
 					customersPage.setLocationRelativeTo(null);
 					
-					addCustomerPage.setVisible(false);
-					addCustomerPage.setLocationRelativeTo(null);
+					customersInsertPage.setVisible(false);
+					customersInsertPage.setLocationRelativeTo(null);
 					
 					statisticsPage.setVisible(false);
 					statisticsPage.setLocationRelativeTo(null);
 					
-					updateCustomerPage.setVisible(false);
-					updateCustomerPage.setLocationRelativeTo(null);
+					customersUpdatePage.setVisible(false);
+					customersUpdatePage.setLocationRelativeTo(null);
 					
 					stockPage.setVisible(false);
 					stockPage.setLocationRelativeTo(null);
@@ -53,8 +65,8 @@ public class Main {
 					customerStatsPage.setVisible(false);
 					customerStatsPage.setLocationRelativeTo(null);
 					
-					addProductPage.setVisible(false);
-					addProductPage.setLocationRelativeTo(null);
+					productInsertPage.setVisible(false);
+					productInsertPage.setLocationRelativeTo(null);
 					
 					productsPage.setVisible(false);
 					productsPage.setLocationRelativeTo(null);
@@ -65,8 +77,44 @@ public class Main {
 					productViewPage.setVisible(false);
 					productViewPage.setLocationRelativeTo(null);
 					
-					updateProductPage.setVisible(false);
-					updateProductPage.setLocationRelativeTo(null);
+					productUpdatePage.setVisible(false);
+					productUpdatePage.setLocationRelativeTo(null);
+					
+					purchasesPage.setVisible(false);
+					purchasesPage.setLocationRelativeTo(null);
+					
+					purchasesStatsPage.setVisible(false);
+					purchasesStatsPage.setLocationRelativeTo(null);
+					
+					purchasesMaterialsPage.setVisible(false);
+					purchasesMaterialsPage.setLocationRelativeTo(null);
+					
+					purchaseMaterialsInsertPage.setVisible(false);
+					purchaseMaterialsInsertPage.setLocationRelativeTo(null);
+					
+					purchaseMaterialsStatsPage.setVisible(false);
+					purchaseMaterialsStatsPage.setLocationRelativeTo(null);
+					
+					purchaseMaterialsUpdatePage.setVisible(false);
+					purchaseMaterialsUpdatePage.setLocationRelativeTo(null);
+					
+					purchaseMaterialsViewPage.setVisible(false);
+					purchaseMaterialsViewPage.setLocationRelativeTo(null);
+					
+					suppliersPage.setVisible(false);
+					suppliersPage.setLocationRelativeTo(null);
+					
+					suppliersInsertPage.setVisible(false);
+					suppliersInsertPage.setLocationRelativeTo(null);
+					
+					suppliersStatsPage.setVisible(false);
+					suppliersStatsPage.setLocationRelativeTo(null);
+					
+					suppliersUpdatePage.setVisible(false);
+					suppliersUpdatePage.setLocationRelativeTo(null);
+					
+					suppliersViewPage.setVisible(false);
+					suppliersViewPage.setLocationRelativeTo(null);
 					
 					
 				} catch (Exception e) {
@@ -80,24 +128,24 @@ public class Main {
 		return landingPage;
 	}
 
-	public static SaleRetailPage getSaleRetailPage() {
-		return saleRetailPage;
+	public static SalesPage getSalesPage() {
+		return salesPage;
 	}
 
 	public static CustomersPage getCustomersPage() {
 		return customersPage;
 	}
 
-	public static AddCustomerPage getAddCustomerPage() {
-		return addCustomerPage;
+	public static CustomersInsertPage getCustomersInsertPage() {
+		return customersInsertPage;
 	}
 
 	public static StatisticsPage getStatisticsPage() {
 		return statisticsPage;
 	}
 
-	public static UpdateCustomerPage getUpdateCustomerPage() {
-		return updateCustomerPage;
+	public static CustomersUpdatePage getCustomersUpdatePage() {
+		return customersUpdatePage;
 	}
 
 	public static StockPage getStockPage() {
@@ -112,8 +160,8 @@ public class Main {
 		return customerViewPage;
 	}
 
-	public static AddProductPage getAddProductPage() {
-		return addProductPage;
+	public static ProductInsertPage getProductInsertPage() {
+		return productInsertPage;
 	}
 
 	public static ProductsPage getProductsPage() {
@@ -128,15 +176,57 @@ public class Main {
 		return productViewPage;
 	}
 
-	public static UpdateProductPage getUpdateProductPage() {
-		return updateProductPage;
+	public static ProductUpdatePage getProductUpdatePage() {
+		return productUpdatePage;
 	}
-	
-	
-	
-	
-	
-	
+
+	public static PurchasesPage getPurchasesPage() {
+		return purchasesPage;
+	}
+
+	public static PurchasesStatsPage getPurchasesStatsPage() {
+		return purchasesStatsPage;
+	}
+
+	public static PurchasesMaterialsPage getPurchasesMaterialsPage() {
+		return purchasesMaterialsPage;
+	}
+
+	public static PurchaseMaterialsInsertPage getPurchaseMaterialsInsertPage() {
+		return purchaseMaterialsInsertPage;
+	}
+
+	public static PurchaseMaterialsStatsPage getPurchaseMaterialsStatsPage() {
+		return purchaseMaterialsStatsPage;
+	}
+
+	public static PurchaseMaterialsUpdatePage getPurchaseMaterialsUpdatePage() {
+		return purchaseMaterialsUpdatePage;
+	}
+
+	public static PurchaseMaterialsViewPage getPurchaseMaterialsViewPage() {
+		return purchaseMaterialsViewPage;
+	}
+
+	public static SuppliersPage getSuppliersPage() {
+		return suppliersPage;
+	}
+
+	public static SuppliersInsertPage getSuppliersInsertPage() {
+		return suppliersInsertPage;
+	}
+
+	public static SuppliersStatsPage getSuppliersStatsPage() {
+		return suppliersStatsPage;
+	}
+
+	public static SuppliersUpdatePage getSuppliersUpdatePage() {
+		return suppliersUpdatePage;
+	}
+
+	public static SuppliersViewPage getSuppliersViewPage() {
+		return suppliersViewPage;
+	}
 	
 	
 	
