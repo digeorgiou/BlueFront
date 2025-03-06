@@ -6,17 +6,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import blueapp.model.Customer;
+
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SalesPage extends JFrame {
 
@@ -27,9 +39,19 @@ public class SalesPage extends JFrame {
 	private DefaultTableModel model = new DefaultTableModel();
 	private JTextField textFieldProductSearch;
 	private JTextField textFieldQuantity;
+	private JComboBox<Customer> customerComboBox;
+	private List<Customer> customers = new ArrayList<>();
 
 	
 	public SalesPage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				customers = fetchCustomersFromDatabase();
+				customers.forEach(customer -> customerComboBox.addItem(customer));
+				customerComboBox.setSelectedIndex(0);
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -104,9 +126,9 @@ public class SalesPage extends JFrame {
 		btnReturnButton.setBounds(15, 486, 179, 89);
 		contentPane.add(btnReturnButton);
 		
-		JComboBox comboBoxCustomer = new JComboBox();
-		comboBoxCustomer.setBounds(923, 131, 274, 37);
-		contentPane.add(comboBoxCustomer);
+		customerComboBox = new JComboBox<>();
+		customerComboBox.setBounds(923, 131, 274, 37);
+		contentPane.add(customerComboBox);
 		
 		JLabel lblCustomer = new JLabel("ΠΕΛΑΤΗΣ");
 		lblCustomer.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -178,4 +200,32 @@ public class SalesPage extends JFrame {
 		textFieldQuantity.setBounds(1043, 191, 152, 37);
 		contentPane.add(textFieldQuantity);
 	}
+	
+	private List<Customer> fetchCustomersFromDatabase() {
+		String sql = "SELECT * FROM customers order by lastname asc";
+		List<Customer> customers = new ArrayList();
+		
+		Connection connection = LandingPage.getConnection();
+		
+		try(PreparedStatement ps = connection.prepareStatement(sql)) {
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String firstname = rs.getString("firstname");
+				String lastname = rs.getString("lastname");
+				String phoneNumber = rs.getString("phone_number");
+				String VAT = rs.getString("vat");
+				String DOY = rs.getString("doy");
+				String address = rs.getString("address");
+				String email = rs.getString("email");
+				
+				Customer customer = new Customer(id,firstname,lastname,phoneNumber,address,email, DOY, VAT);
+				customers.add(customer);				
+			}
+		}catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Select Customers Error", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return customers;
+	}	
 }

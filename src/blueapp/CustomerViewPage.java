@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -15,14 +16,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomerViewPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JLabel lblSpecificFirstname;
+	private JLabel lblSpecificLastname;
+	private JLabel lblSpecificPhoneNumber;
+	private JLabel lblSpecificAddress;
+	private JLabel lblSpecificVAT;
+	private JLabel lblSpecificDOY;
+	private JLabel lblSpecificCustomerId;
+	private JLabel lblSpecificEmail;
 
 	
 	public CustomerViewPage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				fetchCustomerFromDatabase(Main.getCustomersPage().getSelectedId());
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -84,32 +105,32 @@ public class CustomerViewPage extends JFrame {
 		lblDOY.setBounds(719, 206, 41, 34);
 		contentPane.add(lblDOY);
 		
-		JLabel lblSpecificFirstname = new JLabel("Ονομα");
+		lblSpecificFirstname = new JLabel("Ονομα");
 		lblSpecificFirstname.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSpecificFirstname.setBounds(434, 148, 194, 22);
 		contentPane.add(lblSpecificFirstname);
 		
-		JLabel lblSpecificLastname = new JLabel("Επωνυμο");
+		lblSpecificLastname = new JLabel("Επωνυμο");
 		lblSpecificLastname.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSpecificLastname.setBounds(434, 226, 194, 22);
 		contentPane.add(lblSpecificLastname);
 		
-		JLabel lblSpecificPhoneNumber = new JLabel("Τηλεφωνο");
+		lblSpecificPhoneNumber = new JLabel("Τηλεφωνο");
 		lblSpecificPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSpecificPhoneNumber.setBounds(434, 298, 83, 22);
 		contentPane.add(lblSpecificPhoneNumber);
 		
-		JLabel lblSpecificAddress = new JLabel("Διεύθυνση");
+		lblSpecificAddress = new JLabel("Διεύθυνση");
 		lblSpecificAddress.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSpecificAddress.setBounds(434, 375, 194, 22);
 		contentPane.add(lblSpecificAddress);
 		
-		JLabel lblSpecificVAT = new JLabel("ΑΦΜ");
+		lblSpecificVAT = new JLabel("ΑΦΜ");
 		lblSpecificVAT.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSpecificVAT.setBounds(838, 148, 194, 22);
 		contentPane.add(lblSpecificVAT);
 		
-		JLabel lblSpecificDOY = new JLabel("ΔΟΥ");
+		lblSpecificDOY = new JLabel("ΔΟΥ");
 		lblSpecificDOY.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSpecificDOY.setBounds(838, 213, 194, 22);
 		contentPane.add(lblSpecificDOY);
@@ -127,6 +148,52 @@ public class CustomerViewPage extends JFrame {
 		btnReturn.setBackground(new Color(32, 45, 64));
 		btnReturn.setBounds(485, 486, 262, 82);
 		contentPane.add(btnReturn);
+		
+		JLabel lblCustomerId = new JLabel("Κωδικός Πελάτη");
+		lblCustomerId.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCustomerId.setBounds(638, 291, 122, 34);
+		contentPane.add(lblCustomerId);
+		
+		lblSpecificCustomerId = new JLabel("Κωδικός");
+		lblSpecificCustomerId.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificCustomerId.setBounds(838, 303, 96, 22);
+		contentPane.add(lblSpecificCustomerId);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblEmail.setBounds(719, 368, 41, 34);
+		contentPane.add(lblEmail);
+		
+		lblSpecificEmail = new JLabel("Email");
+		lblSpecificEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSpecificEmail.setBounds(838, 380, 229, 22);
+		contentPane.add(lblSpecificEmail);
+	}
+	
+	private void fetchCustomerFromDatabase(int id) {
+		String sql = "SELECT * FROM customers WHERE id = ?";
+		Connection conn = LandingPage.getConnection();
+		
+		try(PreparedStatement ps = conn.prepareStatement(sql)){
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				lblSpecificFirstname.setText(rs.getString("firstname"));
+				lblSpecificLastname.setText(rs.getString("lastname"));
+				lblSpecificPhoneNumber.setText(rs.getString("phone_number"));
+				lblSpecificAddress.setText(rs.getString("address"));
+				lblSpecificVAT.setText(rs.getString("vat"));
+				lblSpecificDOY.setText(rs.getString("doy"));
+				lblSpecificCustomerId.setText(rs.getString("id"));
+				lblSpecificEmail.setText(rs.getString("email"));
+				
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Select error in fetch Customer", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 
 }

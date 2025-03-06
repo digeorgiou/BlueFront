@@ -5,12 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -18,6 +23,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomersPage extends JFrame {
 
@@ -26,9 +37,16 @@ public class CustomersPage extends JFrame {
 	private JTable table;
 	private DefaultTableModel model = new DefaultTableModel();
 	private JTextField textFieldCustomerSearch;
+	private int selectedId;
 
 	
 	public CustomersPage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				buildTable();
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -38,6 +56,25 @@ public class CustomersPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				//check if the selection is still adjusting
+				if(!e.getValueIsAdjusting()) {
+					//Get the selected row index
+					int selectedRow = table.getSelectedRow();
+					
+					//check if a row is selected
+					if (selectedRow != -1) {
+						//Get data from the selected row
+//						String selectedStr = (String) model.getValueAt(selectedRow, 0);
+						selectedId = (int) model.getValueAt(selectedRow, 0);
+					}
+				}
+			}
+		});
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -59,6 +96,11 @@ public class CustomersPage extends JFrame {
 		textFieldCustomerSearch.setColumns(10);
 		
 		JButton btnCustomerSearch = new JButton("Αναζήτηση");
+		btnCustomerSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buildTable();
+			}
+		});
 		btnCustomerSearch.setBackground(new Color(32, 45, 64));
 		btnCustomerSearch.setForeground(new Color(255, 255, 255));
 		btnCustomerSearch.setBounds(625, 124, 243, 49);
@@ -157,10 +199,66 @@ public class CustomersPage extends JFrame {
 		contentPane.add(btnShowCustomerHistory);
 		
 		JButton btnDeleteCustomer = new JButton("Διαγραφή Πελάτη");
+		btnDeleteCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				doDelete(getSelectedId());
+			}
+		});
 		btnDeleteCustomer.setForeground(Color.WHITE);
 		btnDeleteCustomer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnDeleteCustomer.setBackground(new Color(182, 7, 64));
 		btnDeleteCustomer.setBounds(27, 189, 198, 96);
 		contentPane.add(btnDeleteCustomer);
+	}
+	
+	public int getSelectedId() {
+		return selectedId;
+	}
+	
+	private void buildTable() {
+		String sql = "SELECT id, lastname, firstname, phone_number FROM customers WHERE lastname LIKE ?";
+		Connection conn = LandingPage.getConnection();
+		
+		try(PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, textFieldCustomerSearch.getText().trim() + "%");
+			ResultSet rs = ps.executeQuery();
+			
+			model.setRowCount(0); // Clear Table
+			
+			while(rs.next()) {
+				Object[] row = {
+						rs.getInt("id"),
+						rs.getString("lastname"),
+						rs.getString("firstname"),
+						rs.getString("phone_number")
+				};
+				model.addRow(row);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"Select Error", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void doDelete(int id) {
+		String sql = "DELETE FROM customers WHERE id = ?";
+		Connection conn = LandingPage.getConnection();
+		
+
+		try(PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, id);
+			
+			int answer = JOptionPane.showConfirmDialog(null, "Είστε σίγουρος", "Διαγραφή", JOptionPane.YES_NO_OPTION);
+			if(answer == JOptionPane.YES_OPTION) {
+				int rowsAffected = ps.executeUpdate();
+				JOptionPane.showMessageDialog(null, rowsAffected + "πελάτης διαγράφηκε", "Διαγραφή", JOptionPane.INFORMATION_MESSAGE );
+			} else {
+				return;
+			}
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"Delete Error", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

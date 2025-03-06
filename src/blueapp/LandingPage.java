@@ -1,6 +1,9 @@
 package blueapp;
 
 import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,14 +14,35 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class LandingPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private static Connection connection;
 
 	
 	public LandingPage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				String URL = "jdbc:postgresql://localhost:5432/BlueMargaritaDB";
+				String user = "user-7";
+				String password = "12345";
+				
+				try {
+					//Class.forName("com.mysql.cj.jdbc.Driver"); θα χρειαζοταν αν δεν ειχαμε βαλει τον driver στο classpath
+					connection = DriverManager.getConnection(URL,user,password);
+					System.out.println("Connection Success");
+				}catch  (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 		setTitle("Blue Margarita");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
@@ -219,5 +243,9 @@ public class LandingPage extends JFrame {
 		lblPhotoSunset.setIcon(new ImageIcon(LandingPage.class.getResource("/images/sunset1030.jpg")));
 		lblPhotoSunset.setBounds(226, 81, 1030, 551);
 		contentPane.add(lblPhotoSunset);
+	}
+	
+	public static Connection getConnection() {
+		return connection;
 	}
 }

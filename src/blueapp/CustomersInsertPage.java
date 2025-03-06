@@ -32,6 +32,7 @@ public class CustomersInsertPage extends JFrame {
 	private JTextField textFieldAddress;
 	private JTextField textFieldVAT;
 	private JTextField textFieldDOY;
+	private JTextField textFieldEmail;
 
 	public CustomersInsertPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,13 +90,13 @@ public class CustomersInsertPage extends JFrame {
 		
 		textFieldVAT = new JTextField();
 		textFieldVAT.setColumns(10);
-		textFieldVAT.setBounds(767, 214, 207, 53);
+		textFieldVAT.setBounds(767, 214, 247, 53);
 		textFieldVAT.setEnabled(false);
 		contentPane.add(textFieldVAT);
 		
 		textFieldDOY = new JTextField();
 		textFieldDOY.setColumns(10);
-		textFieldDOY.setBounds(767, 303, 207, 53);
+		textFieldDOY.setBounds(767, 303, 247, 53);
 		textFieldDOY.setEnabled(false);
 		contentPane.add(textFieldDOY);
 		
@@ -172,5 +173,15 @@ public class CustomersInsertPage extends JFrame {
 		btnSave.setBackground(new Color(0, 128, 64));
 		btnSave.setBounds(734, 501, 262, 82);
 		contentPane.add(btnSave);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setBounds(767, 388, 247, 53);
+		contentPane.add(textFieldEmail);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblEmail.setBounds(674, 395, 83, 34);
+		contentPane.add(lblEmail);
 	}
 }

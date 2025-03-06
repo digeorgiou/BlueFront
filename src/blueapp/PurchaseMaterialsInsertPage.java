@@ -7,25 +7,38 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PurchaseMaterialsInsertPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldMaterialName;
-	private JTextField textFieldMaterialIdName;
 	private JTextField textFieldMaterialPrice;
 	private JTextField textFieldStock;
 
 
 	public PurchaseMaterialsInsertPage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				textFieldMaterialName.setText("");
+				textFieldStock.setText("");
+				textFieldMaterialPrice.setText("");
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
@@ -57,11 +70,6 @@ public class PurchaseMaterialsInsertPage extends JFrame {
 		footer.setBounds(0, 632, 1232, 99);
 		contentPane.add(footer);
 		
-		JLabel lblMaterialId = new JLabel("Κωδικός");
-		lblMaterialId.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMaterialId.setBounds(208, 201, 68, 34);
-		contentPane.add(lblMaterialId);
-		
 		JLabel lblMaterialName = new JLabel("Όνομα");
 		lblMaterialName.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblMaterialName.setBounds(208, 296, 68, 34);
@@ -71,11 +79,6 @@ public class PurchaseMaterialsInsertPage extends JFrame {
 		textFieldMaterialName.setColumns(10);
 		textFieldMaterialName.setBounds(341, 294, 220, 42);
 		contentPane.add(textFieldMaterialName);
-		
-		textFieldMaterialIdName = new JTextField();
-		textFieldMaterialIdName.setColumns(10);
-		textFieldMaterialIdName.setBounds(341, 199, 220, 42);
-		contentPane.add(textFieldMaterialIdName);
 		
 		JLabel lblMaterialPrice = new JLabel("Τιμή (ανα τμχ)");
 		lblMaterialPrice.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -111,6 +114,41 @@ public class PurchaseMaterialsInsertPage extends JFrame {
 		contentPane.add(btnReturn);
 		
 		JButton btnSave = new JButton("Αποθήκευση");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Data Binding (Παίρνω τα data απο την φορμα και τα βαζω σε δικες μου μεταβλητες)
+				
+				
+				String name = textFieldMaterialName.getText().trim();
+				String quantityInStockString = textFieldStock.getText().trim();
+				int quantityInStock = Integer.valueOf(quantityInStockString);
+				String priceString = textFieldMaterialPrice.getText().trim();
+				double price = Double.valueOf(priceString);
+				
+			
+				//Validate (Έλεγχος )
+				
+				//Insert
+				
+				String sql = "INSERT INTO materials (name, quantity_in_stock, unit_price) VALUES (? , ?, ?)";
+				Connection conn = LandingPage.getConnection();
+				
+				try (PreparedStatement ps = conn.prepareStatement(sql)){
+					
+					
+					ps.setString(1, name);
+					ps.setInt(2, quantityInStock);
+					ps.setDouble(3, price);
+					
+					int n = ps.executeUpdate();
+					
+					JOptionPane.showMessageDialog(null, n + "record inserted", "INSERT", JOptionPane.PLAIN_MESSAGE);
+				}catch(SQLException e1) {
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Insertion Error", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnSave.setForeground(Color.WHITE);
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSave.setBackground(new Color(0, 128, 64));

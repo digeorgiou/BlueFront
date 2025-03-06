@@ -5,15 +5,32 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import blueapp.model.Material;
+import blueapp.model.Product;
+import blueapp.model.ProductMaterial;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class ProductInsertPage extends JFrame {
 
@@ -24,19 +41,30 @@ public class ProductInsertPage extends JFrame {
 	private JTextField textFieldWeight;
 	private JTextField textFieldPrice;
 	private JTextField textFieldTimeToMake;
-	private JTextField textFieldCost;
 	private JTextField textFieldStock;
-	private JTextField textFieldMaterial;
 	private JTextField textFieldCategory;
+	private JTextArea textAreaDescription;
+    private JList<String> materialList; // To display materials
+    private DefaultListModel<String> materialListModel; // Model for the JList
+    private List<Material> materials; // Temporary storage for materials from the database
 
 	public ProductInsertPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1246, 768);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+//		// Initialize the list of materials
+//        materials = fetchMaterialsFromDatabase(); // Fetch materials from the database
+//        materialListModel = new DefaultListModel<>();
+//        for (Material material : materials) {
+//            materialListModel.addElement(material.getName()); // Add material names to the list model
+//        }
+//        materialList = new JList<>(materialListModel);
+//        materialList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // Allow multiple selections
+//		
 		
 		JPanel header = new JPanel();
 		header.setLayout(null);
@@ -63,17 +91,17 @@ public class ProductInsertPage extends JFrame {
 		
 		textFieldProductId = new JTextField();
 		textFieldProductId.setColumns(10);
-		textFieldProductId.setBounds(368, 131, 220, 42);
+		textFieldProductId.setBounds(368, 131, 238, 37);
 		contentPane.add(textFieldProductId);
 		
 		textFieldProductName = new JTextField();
 		textFieldProductName.setColumns(10);
-		textFieldProductName.setBounds(368, 219, 220, 42);
+		textFieldProductName.setBounds(368, 199, 238, 37);
 		contentPane.add(textFieldProductName);
 		
 		textFieldWeight = new JTextField();
 		textFieldWeight.setColumns(10);
-		textFieldWeight.setBounds(368, 393, 220, 42);
+		textFieldWeight.setBounds(368, 262, 238, 37);
 		contentPane.add(textFieldWeight);
 		
 		JLabel lblProductId = new JLabel("Κωδικός Προϊόντος");
@@ -83,17 +111,17 @@ public class ProductInsertPage extends JFrame {
 		
 		JLabel lblProductName = new JLabel("Όνομα");
 		lblProductName.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblProductName.setBounds(258, 217, 56, 34);
+		lblProductName.setBounds(236, 198, 56, 34);
 		contentPane.add(lblProductName);
 		
 		JLabel lblMaterial = new JLabel("Υλικό");
 		lblMaterial.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMaterial.setBounds(268, 306, 46, 34);
+		lblMaterial.setBounds(268, 375, 46, 34);
 		contentPane.add(lblMaterial);
 		
 		JLabel lblWeight = new JLabel("Βάρος (γρ.)");
 		lblWeight.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblWeight.setBounds(221, 395, 93, 34);
+		lblWeight.setBounds(221, 261, 93, 34);
 		contentPane.add(lblWeight);
 		
 		JButton btnReturn = new JButton("Επιστροφή");
@@ -131,11 +159,6 @@ public class ProductInsertPage extends JFrame {
 		textFieldPrice.setBounds(834, 199, 238, 37);
 		contentPane.add(textFieldPrice);
 		
-		JLabel lblCost = new JLabel("Κόστος");
-		lblCost.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCost.setBounds(722, 336, 56, 34);
-		contentPane.add(lblCost);
-		
 		textFieldTimeToMake = new JTextField();
 		textFieldTimeToMake.setColumns(10);
 		textFieldTimeToMake.setBounds(834, 262, 238, 37);
@@ -146,29 +169,98 @@ public class ProductInsertPage extends JFrame {
 		lblTimeToMake.setBounds(669, 261, 109, 34);
 		contentPane.add(lblTimeToMake);
 		
-		textFieldCost = new JTextField();
-		textFieldCost.setColumns(10);
-		textFieldCost.setBounds(834, 337, 238, 37);
-		contentPane.add(textFieldCost);
-		
 		textFieldStock = new JTextField();
 		textFieldStock.setColumns(10);
-		textFieldStock.setBounds(834, 400, 238, 37);
+		textFieldStock.setBounds(834, 356, 238, 37);
 		contentPane.add(textFieldStock);
 		
 		JLabel lblStock = new JLabel("Απόθεμα");
 		lblStock.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblStock.setBounds(712, 403, 66, 34);
+		lblStock.setBounds(712, 355, 66, 34);
 		contentPane.add(lblStock);
-		
-		textFieldMaterial = new JTextField();
-		textFieldMaterial.setColumns(10);
-		textFieldMaterial.setBounds(368, 298, 220, 42);
-		contentPane.add(textFieldMaterial);
 		
 		textFieldCategory = new JTextField();
 		textFieldCategory.setColumns(10);
-		textFieldCategory.setBounds(834, 125, 238, 42);
+		textFieldCategory.setBounds(834, 125, 238, 37);
 		contentPane.add(textFieldCategory);
+		
+		JList list = new JList();
+		list.setBounds(151, 317, 1, 1);
+		contentPane.add(list);
+		
+		JLabel lblDescription = new JLabel("Περιγραφή");
+		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblDescription.setBounds(69, 322, 96, 34);
+		contentPane.add(lblDescription);
+		
+		JTextArea textAreaDescription = new JTextArea();
+		textAreaDescription.setLineWrap(true);
+		textAreaDescription.setBounds(27, 367, 171, 117);
+		contentPane.add(textAreaDescription);
+		
+		JScrollPane materialScrollPane = new JScrollPane(materialList);
+		materialScrollPane.setBounds(371, 353, 235, 82);
+		contentPane.add(materialScrollPane);
 	}
+	
+//		private List<Material> fetchMaterialsFromDatabase() {
+//			List<Material> materials = new ArrayList<>();
+//			String sql = "SELECT * FROM materials order by name asc";
+//			Connection conn2 = LandingPage.getConnection();
+//			
+//			try(PreparedStatement ps = conn2.prepareStatement(sql)){
+//				ResultSet rs = ps.executeQuery();
+//				while (rs.next()) {
+//					int id = rs.getInt("id");
+//					String name = rs.getString("name");
+//					int quantity = rs.getInt("quantity_in_stock");
+//					double price = rs.getDouble("unit_price");
+//					
+//					Material material = new Material(id,name,quantity,price);
+//					materials.add(material);
+//				}
+//				}catch(SQLException e) {
+//					e.printStackTrace();
+//					JOptionPane.showMessageDialog(this, "Error Fetching materials", "Error", JOptionPane.ERROR_MESSAGE);
+//			}
+//			return materials;
+//			
+//		}
+//		
+//		// Method to save the product
+//	    private void saveProduct() {
+//	        // Retrieve product details from the text fields
+//	        int productId = Integer.parseInt(textFieldProductId.getText());
+//	        String productName = textFieldProductName.getText();
+//	        String description = textAreaDescription.getText();
+//	        double weight = Double.parseDouble(textFieldWeight.getText());
+//	        double price = Double.parseDouble(textFieldPrice.getText());
+//	        double timeToMake = Double.parseDouble(textFieldTimeToMake.getText());
+//	        int stock = Integer.parseInt(textFieldStock.getText());
+//	        String category = textFieldCategory.getText();
+//
+//	        // Retrieve selected materials
+//	        List<Material> selectedMaterials = new ArrayList<>();
+//	        for (int index : materialList.getSelectedIndices()) {
+//	            selectedMaterials.add(materials.get(index));
+//	        }
+//
+//	        // Create the Product object
+//	        Product product = new Product(productId, productName, weight, description, category, price, stock, timeToMake);
+//	        
+//	    
+//	        // Add the selected materials to the product
+//	        	        for (Material material : selectedMaterials) {
+//	        	        	ProductMaterial pm = new ProductMaterial(product,1.0, material);
+//	        	        	List<ProductMaterial> newList = product.getProductMaterials();
+//	        	        	newList.add(pm);
+//	        	        	product.setProductMaterials(newList);
+//	        //	            product.addMaterial(new ProductMaterial(material.getId(), product.getId(), 1.0)); // Example: quantity = 1.0
+//	        	        }
+//
+//	        // Save the product to the database (you need to implement this)
+//	        // Database.saveProduct(product);
+//
+//	        JOptionPane.showMessageDialog(this, "Το προϊόν αποθηκεύτηκε με επιτυχία!", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
+//	    }
 }
